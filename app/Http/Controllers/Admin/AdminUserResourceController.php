@@ -194,7 +194,7 @@ class AdminUserResourceController extends BaseController
     public function destroy(AdminUserRequest $request, AdminUser $admin_user)
     {
         try {
-
+            User::where('id',$admin_user->user_id)->delete();
             $admin_user->forceDelete();
             return $this->response->message(trans('messages.success.deleted', ['Module' => trans('admin_user.name')]))
                 ->code(202)
@@ -222,6 +222,9 @@ class AdminUserResourceController extends BaseController
         try {
             $data = $request->all();
             $ids = $data['ids'];
+
+            User::whereIn('id',$ids)->delete();
+
             $this->repository->forceDelete($ids);
 
             return $this->response->message(trans('messages.success.deleted', ['Module' => trans('admin_user.name')]))
