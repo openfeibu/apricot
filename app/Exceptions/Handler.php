@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -62,6 +63,13 @@ class Handler extends ExceptionHandler
                     'code' => 403,
                     'url' => '',
                     'message' => $exception->getMessage(),
+                ];
+                break;
+            case ($exception instanceof \Illuminate\Session\TokenMismatchException):
+                $resposeJson = [
+                    'code' => 419,
+                    'url' => '',
+                    'message' => "Token 过期，为了安全请刷新后重试",
                 ];
                 break;
             default:
