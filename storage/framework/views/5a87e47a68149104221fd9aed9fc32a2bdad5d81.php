@@ -1,0 +1,1 @@
+<?php if($nav): ?> 当前位置：<?php if($parent_nav): ?> <a href="<?php echo e($parent_nav->url); ?>"><?php echo e($parent_nav->name); ?></a> > <?php endif; ?> <?php echo e($nav->name); ?> <?php endif; ?>
