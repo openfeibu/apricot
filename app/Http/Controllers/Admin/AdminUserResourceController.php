@@ -222,8 +222,8 @@ class AdminUserResourceController extends BaseController
         try {
             $data = $request->all();
             $ids = $data['ids'];
-
-            User::whereIn('id',$ids)->delete();
+            $user_ids = AdminUser::whereIn('id',$ids)->pluck('user_id');
+            User::whereIn('id',$user_ids)->delete();
 
             $this->repository->forceDelete($ids);
 
