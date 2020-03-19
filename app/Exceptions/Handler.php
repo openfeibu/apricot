@@ -58,6 +58,13 @@ class Handler extends ExceptionHandler
     private function handle($request,$exception)
     {
         switch ($exception) {
+            case ($exception instanceof \App\Exceptions\OutputServerMessageException):
+                $resposeJson = [
+                    'code' => 400,
+                    'detail' => $exception->getMessage(),
+                ];
+                break;
+
             case ($exception instanceof \App\Exceptions\Roles\PermissionDeniedException):
                 $resposeJson = [
                     'code' => 403,

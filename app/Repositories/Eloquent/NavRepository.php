@@ -27,7 +27,7 @@ class NavRepository extends BaseRepository implements NavRepositoryInterface
     {
         return config('model.nav.nav.model');
     }
-    public function top($category_id)
+    public function top($category_id=1)
     {
         return $this->where(['parent_id' => 0,'category_id' =>$category_id])->orderBy('order','asc')->orderBy('id','asc')->all();
     }
@@ -39,7 +39,7 @@ class NavRepository extends BaseRepository implements NavRepositoryInterface
     {
         return $this->orderBy('order','asc')->orderBy('id','asc')->all();
     }
-    public function navs($category_id)
+    public function navs($category_id=1)
     {
         $navs = [];
         $top_navs = $this->top($category_id);
