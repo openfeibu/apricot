@@ -45,6 +45,7 @@ class PlantResourceController extends BaseController
         }
         return $this->response->title(trans('app.admin.panel'))
             ->view('plant.index')
+			->data(['slug' => $this->slug])
             ->output();
     }
     public function create(Request $request)
